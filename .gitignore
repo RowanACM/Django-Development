@@ -1,0 +1,4 @@
+# Generated Files
+*.pyc
+.idea
+_build
