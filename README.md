@@ -1,2 +1,2 @@
 # Django-Development
-Development of Django Python website (to be used for ProfHacks).
+Development of Django Python website (Web Dev mini project).
