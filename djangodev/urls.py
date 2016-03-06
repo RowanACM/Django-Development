@@ -22,4 +22,5 @@ from pages import urls
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('pages.urls')),
+	url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
 ]
