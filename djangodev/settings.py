@@ -13,7 +13,8 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 import os
 
 import environ
-
+env =environ.Env()
+env.read_env()
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/myfile.py - 2 = /)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -24,10 +25,10 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '74#%zc)(*s_9wsd$hx_4$pdj*+s=mjm5@=8p+x0u6v60z@g8!='
+SECRET_KEY = env('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = env('DEBUG')
 
 ALLOWED_HOSTS = []
 
@@ -82,11 +83,11 @@ WSGI_APPLICATION = 'djangodev.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'djangodev',
-        'USER': 'postgres',
-        'PASSWORD': 'tuxedo94!',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': env('DB_NAME'),
+        'USER': env('DB_USER'),
+        'PASSWORD': env('DB_PASSWORD'),
+        'HOST': env('DB_HOST'),
+        'PORT': env('DB_PORT'),
     }
 }
 
@@ -143,3 +144,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
+
+#API ENV Variables
+AUTH_TOKEN = env('AUTH_TOKEN')

@@ -1,4 +1,7 @@
 # Generated Files
 *.pyc
-.idea
+.idea/
 _build
+
+# Environment File
+.Env
