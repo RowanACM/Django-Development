@@ -18,9 +18,11 @@ from django.conf.urls import url, include
 from django.contrib import admin
 
 from pages import urls
+from api import urls
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^', include('pages.urls')),
     url(r'^api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^api/', include('api.urls'),
 ]
