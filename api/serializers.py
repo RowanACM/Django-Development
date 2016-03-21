@@ -1,9 +1,8 @@
 from rest_framework import serializers
 
-
 from models import Member
-from rest_framework import serializers
 
+# Create Your Serializers Here
 
 class MemberSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
