@@ -6,4 +6,14 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 
-# Create your views here.
+from models import Member
+from rest_framework import viewsets
+from serializers import MemberSerializer
+
+
+class MemberViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = Member.objects.all().order_by('-date_joined')
+    serializer_class = MemberSerializer
