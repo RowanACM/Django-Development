@@ -7,5 +7,5 @@ from django.db import models
 class Member(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    meetings_attend = models.IntegerField(0)
+    meetings_attend = models.IntegerField(default=0)
 
