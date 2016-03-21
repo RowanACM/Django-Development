@@ -12,8 +12,15 @@ from serializers import MemberSerializer
 
 
 class MemberViewSet(viewsets.ModelViewSet):
+<<<<<<< HEAD
     """
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Member.objects.all().order_by('-date_joined')
     serializer_class = MemberSerializer
+=======
+    	"""
+        API endpoint that allows users to be viewed or edited.
+	"""
+	serializer_class = MemberSerializer
+>>>>>>> f986dd158f6425084296b38923cdb173b25f7e64
