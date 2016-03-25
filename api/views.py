@@ -30,27 +30,12 @@ class MemberViewSet(viewsets.ModelViewSet):
             members = Member.objects.all()
             serializer = MemberSerializer(members, many=True)
             return JSONResponse(serializer.data)
-        
-"""
+
 class MeetingsViewSet(viewsets.ModelViewSet):
-
-   # Allows users to see which Meetings were attended (by date and time)
-   # @Work-In Progress(WIP) TODO: Method should list everything in the Meetings table
-
-    serializer_class = MeetingsSerializer
-"""
-
-
-class MeetingsView(APIView):
-    """
-    View for Meeting in the system.
-
-    * Requires token authentication.
-    * Only admin users are able to access this view.
-    """
-    def get(self, request, format=None):
-        """
-        Return a list of all users.
-        """
-        usernames = [user.username for user in User.objects.all()]
-        return Response(usernames)
+    Allows certain users to see which Meetings were attended (by date and time)
+    should list everything in the Meetings table
+    def listMembers(self):
+       if self.method == 'GET':
+           meetings = Meetings.objects.all()
+           serializer = MeetingsSerializer(Meetings, many = True)
+           return JSONResponse
