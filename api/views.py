@@ -32,8 +32,8 @@ class MemberViewSet(viewsets.ModelViewSet):
             return JSONResponse(serializer.data)
 
 class MeetingsViewSet(viewsets.ModelViewSet):
-    Allows certain users to see which Meetings were attended (by date and time)
-    should list everything in the Meetings table
+    '''Allows certain users to see which Meetings were attended (by date and time)
+    should list everything in the Meetings table'''
     def listMembers(self):
        if self.method == 'GET':
            meetings = Meetings.objects.all()
