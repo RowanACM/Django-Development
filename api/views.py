@@ -31,6 +31,27 @@ class MemberViewSet(viewsets.ModelViewSet):
             serializer = MemberSerializer(members, many=True)
             return JSONResponse(serializer.data)
 
+    def post_member(self):
+         if not self.body:
+                return HttpResponse(status=400)
+            try:
+               members = Member()
+           except:
+               return HttpResponse(status=404)
+
+           if self.method == 'POST':
+               data = JSONParser().parse(self)
+               if((not 'auth_token' in data) or auth_token != data['auth_token']):
+                   return HttpResponse(status=401)
+
+               else:
+                   del data['auth_token']
+               serializer = MemberSerializer(members, data=data)
+               if serializer.is_valid():
+                   serializer.save()
+                   return JSONResponse(serializer.data, status=201)
+               return JSONResponse(serializer.errors, status=400)
+
 class MeetingsViewSet(viewsets.ModelViewSet):
     '''Allows certain users to see which Meetings were attended (by date and time)
     should list everything in the Meetings table'''
@@ -40,24 +61,6 @@ class MeetingsViewSet(viewsets.ModelViewSet):
            serializer = MeetingsSerializer(Meetings, many = True)
            return JSONResponse
 
-       if not self.body:
-           return HttpResponse(status=400)
-       try:
-           members = Member()
-       except:
-           return HttpResponse(status=404)
 
-       if self.method == 'POST':
-           data = JSONParser().parse(self)
-           if((not 'auth_token' in data) or auth_token != data['auth_token']):
-               return HttpResponse(status=401)
-
-           else:
-               del data['auth_token']
-           serializer = MemberSerializer(members, data=data)
-           if serializer.is_valid():
-               serializer.save()
-               return JSONResponse(serializer.data, status=201)
-           return JSONResponse(serializer.errors, status=400)
        
 
