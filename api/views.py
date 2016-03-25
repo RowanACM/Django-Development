@@ -10,13 +10,17 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import authentication, permissions
 
-from models import Member
-from models import Meetings
+from models import Member, Meetings
 
-from serializers import MemberSerializer
-from serializers import MeetingsSerializer
+from serializers import MemberSerializer, MeetingsSerializer
 
 # Create Your Views Here
+
+class JSONResponse(HttpResponse):
+    def __init__(self, data, **kwargs):
+        content = JSONRenderer().render(data)
+        kwargs['content_type'] = 'application/json'
+        super(JSONResponse, self).__init__(content, **kwargs)
 
 class MemberViewSet(viewsets.ModelViewSet):
     """

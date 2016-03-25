@@ -13,4 +13,4 @@ class MemberSerializer(serializers.HyperlinkedModelSerializer):
 class MeetingsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Meetings
-        fields = ('serial_ID', 'meeting_Date')
+        fields = ('serial', 'meetingDate')

@@ -13,7 +13,7 @@ class Member(models.Model):
     meetings_attend = models.IntegerField(default=0)
 
 class Meetings(models.Model):
-    serial_ID = models.CharField(max_length=20)
-    meeting_Date = models.DateTimeField(default=datetime.now())
+    serial = models.CharField(max_length=20)
+    meetingDate = models.DateTimeField(default=datetime.now())
 
 
