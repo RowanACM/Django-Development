@@ -25,6 +25,9 @@ class MemberViewSet(viewsets.ModelViewSet):
     """
     queryset = Member.objects.all().order_by('-date_joined')
     serializer_class = MemberSerializer
+    def list_members(self):
+        return JSONResponse()
+    
 
 """
 class MeetingsViewSet(viewsets.ModelViewSet):
