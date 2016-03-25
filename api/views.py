@@ -6,9 +6,6 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import authentication, permissions
 
 from models import Member, Meetings
 
@@ -39,16 +36,13 @@ class MeetingsViewSet(viewsets.ModelViewSet):
 """
 
 
-class ListUsers(APIView):
+class MeetingsView(APIView):
     """
-    View to list all users in the system.
+    View for Meeting in the system.
 
     * Requires token authentication.
     * Only admin users are able to access this view.
     """
-    authentication_classes = (authentication.TokenAuthentication,)
-    permission_classes = (permissions.IsAdminUser,)
-
     def get(self, request, format=None):
         """
         Return a list of all users.
