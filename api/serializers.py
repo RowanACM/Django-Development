@@ -6,11 +6,17 @@ from models import Meetings
 # Create Your Serializers Here
 
 class MemberSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for member Model
+    """
     class Meta:
         model = Member
-        fields = ('id', 'first_name', 'last_name', 'meeting_attend')
+        fields = ('id', 'firstName', 'lastName', 'meetingsAttended')
 
 class MeetingsSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for Mettings Model
+    """
     class Meta:
         model = Meetings
         fields = ('serial', 'meetingDate')

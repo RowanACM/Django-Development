@@ -14,13 +14,16 @@ from serializers import MemberSerializer, MeetingsSerializer
 # Create Your Views Here
 
 class JSONResponse(HttpResponse):
+    """ JSONResponse Extends HttpResponse
+    This allows us to send JSON to a browser
+    """
     def __init__(self, data, **kwargs):
         content = JSONRenderer().render(data)
         kwargs['content_type'] = 'application/json'
         super(JSONResponse, self).__init__(content, **kwargs)
 
 class MemberViewSet(viewsets.ModelViewSet):
-    """
+    """ Extends ModelViewSet from rest_framework
     API endpoint that allows users to be viewed or edited.
     """
     queryset = Member.objects.all().order_by('-date_joined')
@@ -51,8 +54,10 @@ class MemberViewSet(viewsets.ModelViewSet):
                  return JSONResponse(serializer.errors, status=400)
 
 class MeetingsViewSet(viewsets.ModelViewSet):
-    '''Allows certain users to see which Meetings were attended (by date and time)
-    should list everything in the Meetings table'''
+    """ Extends ModelViewSet from rest_framework
+    Allows certain users to see which Meetings were attended (by date and time)
+    Should list everything in the Meetings table
+    """
     def listMembers(self):
        if self.method == 'GET':
            meetings = Meetings.objects.all()
