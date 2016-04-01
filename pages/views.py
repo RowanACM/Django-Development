@@ -4,4 +4,4 @@ from django.conf import settings
 # Create your views here.
 
 def home(request):
-	return render(request, "index.html")
+	return render(request, "masterTemplate.html")
