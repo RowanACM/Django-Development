@@ -25,6 +25,6 @@ class Meetings(models.Model):
     meetingDate is date and time of meeting attended
     """
     serial = models.CharField(max_length=20)
-    meetingDate = models.DateTimeField(default=datetime.now())
+    meetingDate = models.DateTimeField(default=datetime.now(), null=False)
 
 

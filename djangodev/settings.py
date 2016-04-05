@@ -14,7 +14,7 @@ import os
 
 import environ
 env =environ.Env()
-env.read_env()
+env.read_env('.Env')
 ROOT_DIR = environ.Path(__file__) - 2  # (/a/myfile.py - 2 = /)
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
