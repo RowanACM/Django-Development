@@ -7,10 +7,13 @@ This is the base template for this project
 -->
 <html lang='en'>
     <head>
-        <title>Rowan ACM Web Dev Django Project</title>
+        <title>{% block title %} Page Title {% endblock %}</title>
+
         {% load staticfiles %}
         <!-- Bootstrap -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}"/>
+        <!-- ACM CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ACM_CSS/custom.css' %}"/>
         <!-- Animate -->
         <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}"/>
         <!-- jQuery -->
@@ -39,7 +42,8 @@ This is the base template for this project
                                     <span class="icon-bar"></span>
                                 </button>
                                 <a class="navbar-brand" href="index.html">
-                                    <img src="#" alt="ACM Logo"></a>
+                                    <img src="{% static 'img/logo.png' %}" alt="ACM Logo">
+                                </a>
                             </div>
 
                             <!-- Committees Dropdown -->
@@ -50,7 +54,7 @@ This is the base template for this project
                                         <a href="#" class="dropdown-toggle"
                                            data-toggle="dropdown" role="button"
                                            aria-haspopup="true" aria-expanded="false">
-                                            Comittees <span class="caret"></span></a>
+                                            Committees <span class="caret"></span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="#">Web Development</a></li>
                                             <li><a href="#">Android Development</a></li>
@@ -75,5 +79,38 @@ This is the base template for this project
                 </div>
             </div>
         </div>
+        <!-- End of Navbar -->
+
+        </div>
+
+        <!-- Footer -->
+        <div align="center">
+            <div style="width: 88%">
+                <nav class="navbar navbar-inverse">
+                    <div>
+                        <a href="#">About</a>
+                        |
+                        <a href="http://www.acm.org/">ACM Main Site</a>
+                    </div>
+
+                    <div>
+                        <span>
+                            <a href="https://www.facebook.com/rowanacm">
+                                <img src="{% static 'img/FB-f-Logo__blue_29.png' %}" alt="facebook"/>
+                            </a>
+                        </span>
+
+                        <span>
+                            <a href='https://github.com/RowanACM'>
+                                <img src="{% static 'img/GitHub-Mark-Light-32px.png' %}" alt='github'/>
+                            </a>
+                        </span>
+                    </div>
+
+                    <p>ACM Website developed by the ACM Web Development Team 2016</p>
+                </nav>
+            </div>
+        </div>
+
     </body>
 </html>
