@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.contrib.auth import admin, user
 
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
