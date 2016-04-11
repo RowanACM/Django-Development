@@ -7,6 +7,7 @@ from django.contrib.auth import admin, user
 from rest_framework import viewsets
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
 
 from models import Member, Meetings
 
@@ -29,11 +30,15 @@ class MemberViewSet(viewsets.ModelViewSet):
     """
     queryset = Member.objects.all().order_by('-date_joined')
     serializer_class = MemberSerializer
-    def list_members(self):
-        if self.method == 'GET':
-            members = Member.objects.all()
-            serializer = MemberSerializer(members, many=True)
-            return JSONResponse(serializer.data)
+    def list_members(request):
+        if admin:
+            if request.method == 'GET':
+                members = Member.objects.all()
+                serializer = MemberSerializer(members, many=True)
+                return JSONResponse(serializer.data)
+	    else:
+	        return HttpResponse(status=404)
+	# need user
 
     def post_member(self):
          if not self.body:
