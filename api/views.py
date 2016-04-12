@@ -39,7 +39,19 @@ class MemberViewSet(viewsets.ModelViewSet):
                 return JSONResponse(serializer.data)
 	    else:
 	        return HttpResponse(status=404)
-	# need user
+	    return render("html", {})
+
+	"""
+	elif user:
+	    if request.method == 'GET':
+	        members = Member.objects.?
+	
+	    else:
+	        return HttpResponse(status=404)
+	else:
+	    return HttpResponse(status=403)
+
+	"""
 
     def post_member(self):
          if not self.body:
