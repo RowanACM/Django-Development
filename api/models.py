@@ -13,7 +13,7 @@ class Member(models.Model):
     first_name and last_name are given by new memeber
     meettings_attended is a number defaulting to 0 when they initially sign up
     """
-    serial = models.CharField(max_length=20)
+    serial = models.CharField(max_length=20, unique=True)
     firstName = models.CharField(max_length=30)
     lastName = models.CharField(max_length=30)
     meetingsAttended = models.IntegerField(default=0)
@@ -24,7 +24,7 @@ class Meetings(models.Model):
     serial is from Rowan ID Card
     meetingDate is date and time of meeting attended
     """
-    serial = models.CharField(max_length=20)
+    serial = models.CharField(max_length=20, unique=True)
     meetingDate = models.DateTimeField(default=datetime.now(), null=False)
 
 

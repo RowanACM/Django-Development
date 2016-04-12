@@ -29,31 +29,30 @@ class MemberViewSet(viewsets.ModelViewSet):
     """ Extends ModelViewSet from rest_framework
     API endpoint that allows users to be viewed or edited.
     """
-    queryset = Member.objects.all().order_by('-date_joined')
+    queryset = Member.objects.all()
     serializer_class = MemberSerializer
-    def list_members(request):
-        if admin:
-            if request.method == 'GET':
-                members = Member.objects.all()
-                serializer = MemberSerializer(members, many=True)
-                return JSONResponse(serializer.data)
+    def list_members(self, request):
+        """ Given The right credentials
+        View data on members of our club
+        ADMIN: see everything
+        USER: only be able to see their own data
+        ELSE: 403 Forbidden
+        """
+        if not request.body:
+            return HttpResponse(status=403)
+        elif request.method == 'GET':
+            if admin:
+                serializer = MemberSerializer(self.queryset, many=True)
+                data = JSONRenderer().render(serializer.data)
+                return render("__.html", data)
+	    elif user:
+	        return render("__.html", data)
 	    else:
-	        return HttpResponse(status=404)
-	    return render("html", {})
-
-	"""
-	elif user:
-	    if request.method == 'GET':
-	        members = Member.objects.?
-	
-	    else:
-	        return HttpResponse(status=404)
+                return HttpResponse(status=403)
 	else:
-	    return HttpResponse(status=403)
+            return HttpResponse(status=403)
 
-	"""
-
-    def post_member(self):
+    def post_member(self, request):
          if not self.body:
              return HttpResponse(status=400)
          try:
@@ -81,7 +80,7 @@ class MeetingsViewSet(viewsets.ModelViewSet):
        if self.method == 'GET':
            meetings = Meetings.objects.all()
            serializer = MeetingsSerializer(Meetings, many = True)
-           return JSONResponse
+           return JSONResponse(serializer.data)
 
 
        
