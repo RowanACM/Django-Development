@@ -64,7 +64,7 @@ This is the base template for this project
                                     </li>
 
                                     <!-- Events link -->
-                                    <li><a href="#">Events</a></li>
+                                    <li><a href="events">Events</a></li>
 
                                     <!-- Board Members link -->
                                     <li><a href="#">Board Members</a></li>
@@ -81,8 +81,10 @@ This is the base template for this project
         </div>
         <!-- End of Navbar -->
 
-        </div>
-
+        <body>
+        {% block content %}
+        {% endblock %}
+        </body>
         <!-- Footer -->
         <div align="center">
             <div style="width: 88%">
