@@ -76,12 +76,26 @@ class MeetingsViewSet(viewsets.ModelViewSet):
     Allows certain users to see which Meetings were attended (by date and time)
     Should list everything in the Meetings table
     """
-    def listMembers(self):
-       if self.method == 'GET':
-           meetings = Meetings.objects.all()
-           serializer = MeetingsSerializer(Meetings, many = True)
-           return JSONResponse(serializer.data)
-
-
-       
+    queryset = Meetings.objects.all()
+    serializer_class = MeetingsSerializer
+    def list_meetings(self, request):
+        """ Given The right credentials
+        View data on members of our club
+        ADMIN: see everything
+        USER: only be able to see their own data
+        ELSE: 403 Forbidden
+        """
+        if not request.body:
+            return HttpResponse(status=403)
+        elif request.method == 'GET':
+            if admin:
+                serializer = MeetingsSerializer(self.queryset, many=True)
+                data = JSONRenderer().render(serializer.data)
+                return render("__.html", data)
+	    elif user:
+	        return render("__.html", data)
+	    else:
+                return HttpResponse(status=403)
+	else:
+            return HttpResponse(status=403)
 

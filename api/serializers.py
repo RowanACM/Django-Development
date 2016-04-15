@@ -2,6 +2,7 @@ from rest_framework import serializers
 
 from models import Member
 from models import Meetings
+from models import Committees
 
 # Create Your Serializers Here
 
@@ -20,3 +21,12 @@ class MeetingsSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Meetings
         fields = ('id', 'serial', 'meetingDate')
+
+
+class CommitteeSerializer(serializers.HyperlinkedModelSerializer):
+    """
+    Serializer for Committees
+    """
+    class Meta:
+        model = CommitteeSerializer
+        fields = ('id', 'serial', 'committeeName')
