@@ -16,7 +16,7 @@ class MemberSerializer(serializers.HyperlinkedModelSerializer):
 
 class MeetingsSerializer(serializers.HyperlinkedModelSerializer):
     """
-    Serializer for Mettings Model
+    Serializer for Meetings Model
     """
     class Meta:
         model = Meetings
@@ -25,8 +25,8 @@ class MeetingsSerializer(serializers.HyperlinkedModelSerializer):
 
 class CommitteeSerializer(serializers.HyperlinkedModelSerializer):
     """
-    Serializer for Committees
+    Serializer for Committees Model
     """
     class Meta:
-        model = CommitteeSerializer
+        model = Committees
         fields = ('id', 'serial', 'committeeName')

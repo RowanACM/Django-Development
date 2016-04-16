@@ -10,9 +10,9 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import status
 
-from models import Member, Meetings
+from models import Member, Meetings, Committees
 
-from serializers import MemberSerializer, MeetingsSerializer
+from serializers import MemberSerializer, MeetingsSerializer, CommitteeSerializer
 
 # Create Your Views Here
 
@@ -99,3 +99,32 @@ class MeetingsViewSet(viewsets.ModelViewSet):
 	else:
             return HttpResponse(status=403)
 
+
+
+class CommitteesViewSet(viewsets.ModelViewSet):
+    """ Extends ModelViewSet from rest_framework
+    Allows certain users to see his/her committee info
+    Should list everything in the Committees table
+    """
+    queryset = Committees.objects.all()
+    serializer_class = CommitteeSerializer
+    def list_committees(self, request):
+        """ Given The right credentials
+        View data on members of our club
+        ADMIN: see everything
+        USER: only be able to see their own data
+        ELSE: 403 Forbidden
+        """
+        if not request.body:
+            return HttpResponse(status=403)
+        elif request.method == 'GET':
+            if admin:
+                serializer = CommitteeSerializer(self.queryset, many=True)
+                data = JSONRenderer().render(serializer.data)
+                return render("__.html", data)
+	    elif user:
+	        return render("__.html", data)
+	    else:
+                return HttpResponse(status=403)
+	else:
+            return HttpResponse(status=403)

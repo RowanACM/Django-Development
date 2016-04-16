@@ -10,8 +10,8 @@ class Member(models.Model):
     """
     Model for Members of our club
     serial is unique from Rowan ID Card
-    first_name and last_name are given by new memeber
-    meettings_attended is a number defaulting to 0 when they initially sign up
+    first_name and last_name are given by new member
+    meetings_attended is a number defaulting to 0 when they initially sign up
     """
     serial = models.CharField(max_length=24, unique=True)
     firstName = models.CharField(max_length=32)
