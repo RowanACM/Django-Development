@@ -73,7 +73,7 @@ class MemberViewSet(viewsets.ModelViewSet):
         else:
             return HttpResponse(status=403)
 
-class MeetingsViewSet(viewsets.ModelViewSet):
+class MeetingViewSet(viewsets.ModelViewSet):
     """ Extends ModelViewSet from rest_framework
     Allows certain users to see which Meetings were attended (by date and time)
     Should list everything in the Meetings table
@@ -103,7 +103,7 @@ class MeetingsViewSet(viewsets.ModelViewSet):
 
 
 
-class CommitteesViewSet(viewsets.ModelViewSet):
+class CommitteeViewSet(viewsets.ModelViewSet):
     """ Extends ModelViewSet from rest_framework
     Allows certain users to see his/her committee info
     Should list everything in the Committees table
@@ -130,8 +130,35 @@ class CommitteesViewSet(viewsets.ModelViewSet):
                 return HttpResponse(status=403)
 	else:
             return HttpResponse(status=403)
+    def join_committee(self, request):
+        """ Enables a member of ACM to Join a committee
+        this method is to be called by Android Team app
+        """
+        if not request.body:
+            return HttpResponse(status=403)
+        elif request.method == 'POST':
+            if not ('auth_token' in data) or (settings.AUTH_TOKEN != data['auth_token']):
+                return HttpResponse(status=401)
+            else:
+                del data['auth_token']
+                try:
+                    committee = Committee()
+                except:
+                    return HttpResponse(status=500)
+                serializer = CommitteeSerializer(committee, data=data)
+                if serializer.is_valid:
+                    serializer.save()
+                    return JSONResponse(serializer.data, status=201)
+                else:
+                    return JSONResponse(serializer.errors, status=400)
+        else:
+            return HttpResponse(status=403)
 
 def increment_attendance(request):
+    """ Checks a member into our meeting
+    Increments meetings_attended in Member table
+    adds row to meeting table
+    """
     if not request.body:
         return HttpResponse(status=400)
     elif request.method == 'POST':

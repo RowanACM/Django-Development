@@ -18,7 +18,7 @@ class Member(models.Model):
     lastName = models.CharField(max_length=32)
     meetingsAttended = models.IntegerField(default=0)
 
-class Meetings(models.Model):
+class Meeting(models.Model):
     """
     Model for club meetings attended
     serial is from Rowan ID Card
@@ -27,7 +27,7 @@ class Meetings(models.Model):
     serial = models.CharField(max_length=24, unique=True)
     meetingDate = models.DateTimeField(default=datetime.now(), null=False)
 
-class Committees(models.Model):
+class Committee(models.Model):
     """
     Model for committees
     serial is from Rowan ID card
