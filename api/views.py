@@ -53,15 +53,15 @@ class MemberViewSet(viewsets.ModelViewSet):
             return HttpResponse(status=403)
 
     def post_member(self, request):
-         if not self.body:
+         if not request.body:
              return HttpResponse(status=400)
          try:
              members = Member()
          except:
-             return HttpResponse(status=404)
-         if self.method == 'POST':
-             data = JSONParser().parse(self)
-             if((not 'auth_token' in data) or auth_token != data['auth_token']):
+             return HttpResponse(status=500)
+         if request.method == 'POST':
+             data = JSONParser().parse(request)
+             if((not 'auth_token' in data) or settings.AUTH_TOKEN != data['auth_token']):
                  return HttpResponse(status=401)
              else:
                  del data['auth_token']
@@ -70,6 +70,8 @@ class MemberViewSet(viewsets.ModelViewSet):
                      serializer.save()
                      return JSONResponse(serializer.data, status=201)
                  return JSONResponse(serializer.errors, status=400)
+        else:
+            return HttpResponse(status=403)
 
 class MeetingsViewSet(viewsets.ModelViewSet):
     """ Extends ModelViewSet from rest_framework
@@ -128,3 +130,31 @@ class CommitteesViewSet(viewsets.ModelViewSet):
                 return HttpResponse(status=403)
 	else:
             return HttpResponse(status=403)
+
+def increment_attendance(request):
+    if not request.body:
+        return HttpResponse(status=400)
+    elif request.method == 'POST':
+        data = JSONParser().parse(request)
+        if not ('auth_token' in data) or (settings.AUTH_TOKEN != data['auth_token']):
+            return HttpResponse(status=401)
+        else:
+            del data['auth_token']
+            try:
+                meeting = Meeting()
+            except:
+                return HttpResponse(status=500)
+            serializer = MeetingSerializer(meeting, data=data)
+            if serializer.is_valid():
+                try:
+                    Member.objects.raw('UPDATE api_member SET meetings_attended = meetings_attended + 1 WHERE serial=' + data['serial'] + ';')
+                except:
+                    return HttpResponse(status=500)
+                serializer.save()
+                return JSONResponse(serializer.data, status=201)
+            else:
+                return JSONResponse(serializer.errors, status=400)
+    else:
+        return HttpResponse(status=400)
+                
+        
