@@ -10,9 +10,9 @@ from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
 from rest_framework import status
 
-from models import Member, Meetings, Committees
+from models import Member, Meeting, Committee
 
-from serializers import MemberSerializer, MeetingsSerializer, CommitteeSerializer
+from serializers import MemberSerializer, MeetingSerializer, CommitteeSerializer
 
 # Create Your Views Here
 
@@ -67,19 +67,19 @@ class MemberViewSet(viewsets.ModelViewSet):
                  del data['auth_token']
                  serializer = MemberSerializer(members, data=data)
                  if serializer.is_valid():
-                     serializer.save()
-                     return JSONResponse(serializer.data, status=201)
-                 return JSONResponse(serializer.errors, status=400)
-        else:
-            return HttpResponse(status=403)
+                    serializer.save()
+                    return JSONResponse(serializer.data, status=201)
+                 else:
+                    return JSONResponse(serializer.errors, status=400)
+         return HttpResponse(status=403)
 
 class MeetingViewSet(viewsets.ModelViewSet):
     """ Extends ModelViewSet from rest_framework
     Allows certain users to see which Meetings were attended (by date and time)
     Should list everything in the Meetings table
     """
-    queryset = Meetings.objects.all()
-    serializer_class = MeetingsSerializer
+    queryset = Meeting.objects.all()
+    serializer_class = MeetingSerializer
     def list_meetings(self, request):
         """ Given The right credentials
         View data on members of our club
@@ -91,7 +91,7 @@ class MeetingViewSet(viewsets.ModelViewSet):
             return HttpResponse(status=403)
         elif request.method == 'GET':
             if admin:
-                serializer = MeetingsSerializer(self.queryset, many=True)
+                serializer = MeetingSerializer(self.queryset, many=True)
                 data = JSONRenderer().render(serializer.data)
                 return render("__.html", data)
 	    elif user:
@@ -108,7 +108,7 @@ class CommitteeViewSet(viewsets.ModelViewSet):
     Allows certain users to see his/her committee info
     Should list everything in the Committees table
     """
-    queryset = Committees.objects.all()
+    queryset = Committee.objects.all()
     serializer_class = CommitteeSerializer
     def list_committees(self, request):
         """ Given The right credentials
