@@ -1,0 +1,23 @@
+{% extends "masterTemplate.html" %}
+
+{% block title %}Events{% endblock %}
+
+{% block content %}
+    <!--Embedded Google Calendar-->
+		<div align="center">
+			<div class="border" style="width: 85%">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-12 col-sm-9 col-md-9 col-lg-9">
+							<div class="responsive-iframe-container-fullscreen">
+									<iframe src="https://www.google.com/calendar/embed?showTz=0&amp;src=students.rowan.edu_gj0umqr01gtm1ofgc576fu3ujs%40group.calendar.google.com&ctz=America/New_York"
+                                            style="border: 0" width="900" height="600" frameborder="0" scrolling="no">
+									</iframe>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+        <br>
+{% endblock %}

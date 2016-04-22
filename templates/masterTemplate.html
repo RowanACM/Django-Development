@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<!--
+This is the base template for this project
+
+@author Shaan Menon
+@date 5th March 2016
+-->
+<html lang='en'>
+    <head>
+        <title>{% block title %} Page Title {% endblock %}</title>
+
+        {% load staticfiles %}
+        <!-- Bootstrap -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap/bootstrap.min.css' %}"/>
+        <!-- ACM CSS -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/ACM_CSS/custom.css' %}"/>
+        <!-- Animate -->
+        <link rel="stylesheet" type="text/css" href="{% static 'css/animate.css' %}"/>
+        <!-- jQuery -->
+        <script src="{% static 'js/jQuery/jquery-2.2.1.min.js' %}"></script>
+        <!-- Noty -->
+        <script src="{% static 'js/noty/jquery.noty.packaged.min.js' %}"></script>
+    </head>
+    <body>
+        <div class='container-fluid'>
+
+            <!-- Navbar -->
+            <div align="center">
+                <div style='width: 90%;'>
+                    <nav class="navbar navbar-inverse">
+
+                        <!-- ACM Logo -->
+                        <div class="container-fluid">
+                             <div class="navbar-header">
+                                <button type="button" class="navbar-toggle collapsed"
+                                        data-toggle="collapse"
+                                        data-target="#bs-example-navbar-collapse-1"
+                                        aria-expanded="false">
+                                    <span class="sr-only">Toggle navigation</span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                    <span class="icon-bar"></span>
+                                </button>
+                                <a class="navbar-brand" href="index.html">
+                                    <img src="{% static 'img/logo.png' %}" alt="ACM Logo">
+                                </a>
+                            </div>
+
+                            <!-- Committees Dropdown -->
+                            <div class="collapse navbar-collapse"
+                                 id="bs-example-navbar-collapse-1">
+                                <ul class="nav navbar-nav">
+                                    <li class="dropdown">
+                                        <a href="#" class="dropdown-toggle"
+                                           data-toggle="dropdown" role="button"
+                                           aria-haspopup="true" aria-expanded="false">
+                                            Committees <span class="caret"></span></a>
+                                        <ul class="dropdown-menu">
+                                            <li><a href="#">Web Development</a></li>
+                                            <li><a href="#">Android Development</a></li>
+                                            <li><a href="#">Animation Team</a></li>
+                                            <li><a href="#">AI Team</a></li>
+                                        </ul>
+                                    </li>
+
+                                    <!-- Events link -->
+                                    <li><a href="events">Events</a></li>
+
+                                    <!-- Board Members link -->
+                                    <li><a href="#">Board Members</a></li>
+
+                                     <!-- Contact Us link -->
+                                    <li><a href="#">Contact Us</a></li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </nav>
+                </div>
+            </div>
+        </div>
+        <!-- End of Navbar -->
+
+        <body>
+        {% block content %}
+        {% endblock %}
+        </body>
+        <!-- Footer -->
+        <div align="center">
+            <div style="width: 88%">
+                <nav class="navbar navbar-inverse">
+                    <div>
+                        <a href="#">About</a>
+                        |
+                        <a href="http://www.acm.org/">ACM Main Site</a>
+                    </div>
+
+                    <div>
+                        <span>
+                            <a href="https://www.facebook.com/rowanacm">
+                                <img src="{% static 'img/FB-f-Logo__blue_29.png' %}" alt="facebook"/>
+                            </a>
+                        </span>
+
+                        <span>
+                            <a href='https://github.com/RowanACM'>
+                                <img src="{% static 'img/GitHub-Mark-Light-32px.png' %}" alt='github'/>
+                            </a>
+                        </span>
+                    </div>
+
+                    <p>ACM Website developed by the ACM Web Development Team 2016</p>
+                </nav>
+            </div>
+        </div>
+
+    </body>
+</html>
