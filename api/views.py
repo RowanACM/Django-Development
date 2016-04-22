@@ -67,11 +67,11 @@ class MemberViewSet(viewsets.ModelViewSet):
                  del data['auth_token']
                  serializer = MemberSerializer(members, data=data)
                  if serializer.is_valid():
-                     serializer.save()
-                     return JSONResponse(serializer.data, status=201)
-                 return JSONResponse(serializer.errors, status=400)
-        else:
-            return HttpResponse(status=403)
+                    serializer.save()
+                    return JSONResponse(serializer.data, status=201)
+                 else:
+                    return JSONResponse(serializer.errors, status=400)
+         return HttpResponse(status=403)
 
 class MeetingViewSet(viewsets.ModelViewSet):
     """ Extends ModelViewSet from rest_framework
