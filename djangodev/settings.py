@@ -77,6 +77,17 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'djangodev.wsgi.application'
 
+# MANAGER CONFIGURATION
+# ------------------------------------------------------------------------------
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#admins
+ADMINS = (
+    ("""Shaan Menon""", 'smenon18@gmail.com'),
+    ("""Christopher Pryer""", 'pryerc1@students.rowan.edu'),
+)
+
+# See: https://docs.djangoproject.com/en/dev/ref/settings/#managers
+MANAGERS = ADMINS
+
 
 # Database
 # https://docs.djangoproject.com/en/1.9/ref/settings/#databases
